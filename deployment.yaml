@@ -16,7 +16,7 @@ spec:
    spec:
      containers:
      - name: issuetracker
-       image: jp.icr.io/issuetracker/issuetracker:1.0
+       image: jp.icr.io/issuetracker/app:1.0
        ports:
        - containerPort: 5000
 
