@@ -12,10 +12,10 @@ spec:
  template:
    metadata:
      labels:
-       app: issuetracker
+       app: issue-tracker
    spec:
      containers:
-     - name: issue-tracker
+     - name: issuetracker
        image: jp.icr.io/issuetracker/issuetracker:1.0
        ports:
        - containerPort: 5000
