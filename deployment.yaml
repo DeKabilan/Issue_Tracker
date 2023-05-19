@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
  name: issuetracker
  labels:
-   app: issue-tracker
+   app: app
 spec:
  replicas: 3
  selector:
    matchLabels:
-     app: issue-tracker
+     app: app
  template:
    metadata:
      labels:
-       app: issue-tracker
+       app: app
    spec:
      containers:
      - name: issuetracker
