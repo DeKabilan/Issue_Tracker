@@ -23,7 +23,7 @@ def signup():
     if request.method=="POST":
         check=True
         name=request.form['txt']
-        name=name.lower()
+        username=name.lower()
         email=request.form['email']
         email=email.lower()
         password=request.form['pswd']
@@ -82,17 +82,11 @@ def login():
 
 @app.route('/home')
 def home():
-    if useremail=='':
-        return render_template("reg.html")
-    else:
         return render_template("homepage.html")
 
 @app.route('/upload',methods=['GET','POST'])
 def upload():
-    if useremail!='':
         return render_template('upload.html')
-    else:
-        return render_template("homepage.html")
 
 @app.route('/page',methods=['GET','POST'])
 def page():
@@ -103,28 +97,25 @@ def page():
 
 @app.route('/admin',methods=['GET','POST'])
 def admin():
-    if useremail=="admin@123.com":
-        sql = "SELECT * FROM UPLOADTEST"
-        stmt = ibm_db.exec_immediate(conn, sql)
+    sql = "SELECT * FROM UPLOADTEST"
+    stmt = ibm_db.exec_immediate(conn, sql)
+    data = ibm_db.fetch_both(stmt)
+    i=0
+    email = []
+    title = []
+    context = []
+    id = []
+    baselink = "https://test2504.s3.jp-tok.cloud-object-storage.appdomain.cloud/"
+    link = []
+    while data != False:
+        id.insert(i, data[0])
+        title.insert(i, data[1])
+        context.insert(i, data[2])
+        email.insert(i, data[3])
+        link.insert(i, baselink+data[0]+".jpg")
+        i=i+1
         data = ibm_db.fetch_both(stmt)
-        i=0
-        email = []
-        title = []
-        context = []
-        id = []
-        baselink = "https://test2504.s3.jp-tok.cloud-object-storage.appdomain.cloud/"
-        link = []
-        while data != False:
-            id.insert(i, data[0])
-            title.insert(i, data[1])
-            context.insert(i, data[2])
-            email.insert(i, data[3])
-            link.insert(i, baselink+data[0]+".jpg")
-            i=i+1
-            data = ibm_db.fetch_both(stmt)
-        return render_template('admin.html',id=id,title=title,context=context,email=email,len=len(id),link=link)
-    else:
-        return render_template("reg.html")
+    return render_template('admin.html',id=id,title=title,context=context,email=email,len=len(id),link=link)
 
 @app.route('/complaints',methods=['GET','POST'])
 def complaints():
