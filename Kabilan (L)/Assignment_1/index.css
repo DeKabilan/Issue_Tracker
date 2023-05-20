@@ -1,0 +1,52 @@
+body{
+    background: url(bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+}
+
+.flexbox{
+    display: flex;
+}
+
+.eren{
+    margin-top: 100px;
+    justify-content: right;
+
+}
+.eren1{
+    margin-top: 400px;
+    margin-left: 1000px;
+    text-align: right;
+
+}
+
+.ey{
+    margin-left: 80px;
+    font-size: 600%;
+    font-family: 'Oswald', sans-serif;
+    color: white;
+}
+
+.button{
+
+    text-align: center;
+    width: 180px;
+    height: 90px;
+    position: absolute;
+    margin-left: 830px;
+    color: white;
+    background-color: black;
+    font-family: 'Oswald', sans-serif;
+    border-radius: 20px;
+}
+
+.button:hover{
+    color: black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.text{
+    text-decoration: none;
+}

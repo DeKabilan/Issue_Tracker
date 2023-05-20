@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: issuetracker
+ labels:
+   app: issue-tracker
+spec:
+ replicas: 3
+ selector:
+   matchLabels:
+     app: issue-tracker
+ template:
+   metadata:
+     labels:
+       app: issue-tracker
+   spec:
+     containers:
+     - name: issuetracker
+       image: jp.icr.io/issue_tracker/issue_tracker:2.0
+       ports:
+       - containerPort: 5000
+
+

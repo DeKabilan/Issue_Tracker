@@ -23,7 +23,7 @@ def signup():
     if request.method=="POST":
         check=True
         name=request.form['txt']
-        username=name.lower()
+        name=name.lower()
         email=request.form['email']
         email=email.lower()
         password=request.form['pswd']
@@ -41,7 +41,7 @@ def signup():
         if check==True:
             sql  = "INSERT INTO TEST VALUES (?,?,?)"
             stmt = ibm_db.prepare(conn,sql)
-            ibm_db.bind_param(stmt,1,str(username))
+            ibm_db.bind_param(stmt,1,str(name))
             ibm_db.bind_param(stmt,2,str(email))
             ibm_db.bind_param(stmt,3,str(password))
             ibm_db.execute(stmt)
@@ -90,10 +90,7 @@ def upload():
 
 @app.route('/page',methods=['GET','POST'])
 def page():
-    if useremail=="admin@123.com":
-        return render_template('homeadmin.html')
-    else:
-        return render_template('reg.html')
+    return render_template('homeadmin.html')
 
 @app.route('/admin',methods=['GET','POST'])
 def admin():
@@ -151,7 +148,7 @@ def uploadfile():
         sql  = "SELECT MAX(ID) FROM UPLOADTEST"
         stmt = ibm_db.exec_immediate(conn, sql)
         idlist = ibm_db.fetch_tuple(stmt)
-        if idlist==False:
+        if idlist==False or 0:
             img_ID=1
         else:
             img_ID=int(max(idlist))+1
